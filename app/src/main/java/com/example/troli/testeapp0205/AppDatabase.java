@@ -9,15 +9,18 @@ import android.content.Context;
  * Created by troli on 02/05/2018.
  */
 
-@Database(entities = {Lembrete.class}, version =1 )
+@Database(entities = {Lembrete.class}, version =3 )
 public abstract class AppDatabase extends RoomDatabase {
-    private LembreteDAO lembreteDAO;
+    public abstract LembreteDAO lembreteDAO();
 
     private static AppDatabase INSTANCE;
 
-    public AppDatabase getDatabase(Context context) {
+    public static AppDatabase getDatabase(Context context) {
         if(INSTANCE == null)
-            INSTANCE = Room.databaseBuilder(context, AppDatabase.class, "lembrete_db").build();
+            INSTANCE = Room.databaseBuilder(context, AppDatabase.class, "lembrete_db").fallbackToDestructiveMigration().build();
+            // INSTANCE = Room.databaseBuilder(context, AppDatabase.class, "lembrete_db").build();
+            /* Usando esta linha abaixo, cada vez que alterar o VERSION do banco, ele destroi e recria tudo */
+            //INSTANCE = Room.databaseBuilder(context, AppDatabase.class, "lembrete_db").fallbackToDestructiveMigration.build();
         return INSTANCE;
     }
 }

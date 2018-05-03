@@ -17,6 +17,9 @@ public class Lembrete {
     @ColumnInfo(name = "data_lembrete")
     private long dataLembrete;
 
+
+    private long importancia;
+
     public Lembrete() {}
 
     public long getID() {
@@ -41,5 +44,12 @@ public class Lembrete {
 
     public void setDataLembrete(long dataLembrete) {
         this.dataLembrete = dataLembrete;
+    }
+    public long getImportancia() {
+        return importancia;
+    }
+
+    public void setImportancia(long importancia) {
+        this.importancia = importancia;
     }
 }
